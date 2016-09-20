@@ -7,9 +7,72 @@
 
 		<script src="bower_components/webcomponentsjs/webcomponents.js"></script>
 		<link rel="import" href="bower_components/polymer/polymer.html">
+		<link rel="import" href="bower_components/font-roboto/roboto.html">
+		<link rel="import" href="bower_components/paper-styles/paper-styles.html">
+		<link rel="import" href="bower_components/app-layout/app-header/app-header.html">
+		<link rel="import" href="bower_components/app-layout/app-toolbar/app-toolbar.html">
+		<link rel="import" href="bower_components/app-layout/app-drawer/app-drawer.html">
+		<link rel="import" href="bower_components/app-layout/app-header-layout/app-header-layout.html">
+		<link rel="import" href="bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+		<link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
+		<link rel="import" href="bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+		<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+		<link rel="import" href="bower_components/iron-icons/iron-icons.html">
+
+		<!-- For dev only!! -->
+		<link rel="import" href="bower_components/bacon-ipsum/bacon-ipsum.html">
+
+		<style is="custom-style">
+			:root
+			{
+				font-family: 'Roboto', 'Noto', sans-serif;
+				background-color: #eee;
+			}
+
+			app-header
+			{
+				--app-header-background-front-layer:
+					{
+						background-color: var(--paper-cyan-500);
+					};
+
+				--app-header-background-rear-layer:
+					{
+						background-color: var(--paper-blue-500);
+					};
+			}
+
+			paper-icon-button
+			{
+				color: black;
+			}
+		</style>
 	</head>
 
-	<body>
-	
+	<body unresolved>
+		<!-- The whole layout which includes a side drawer and a header layout -->
+		<app-drawer-layout fullbleed>
+			<!-- Drawer on the side of the page -->
+			<app-drawer swipe-open>
+				<h1>Oh hot dayum</h1>
+			</app-drawer>
+
+			<!-- Main content area -->
+			<app-header-layout has-scrolling-region>
+				<app-header effects="waterfall blend-background resize-title" condenses reveals>
+					<app-toolbar>
+						<paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
+						<h4 condensed-title>My App</h4>
+					</app-toolbar>
+					<app-toolbar>
+						<h1 spacer main-title>My App</h1>
+					</app-toolbar>
+				</app-header>
+
+				<div content>My main content -- a placeholder for the future custom elements.</div>
+				<bacon-ipsum sentences="5000"></bacon-ipsum>
+
+			</app-header-layout>
+		</app-drawer-layout>
 	</body>
 </html>

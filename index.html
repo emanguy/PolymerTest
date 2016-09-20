@@ -2,9 +2,11 @@
 	<head>
 		<title>A webpage made with polymer!</title> 
 
+		<!-- Make it mobile friendly and add a theme color for mobile chrome -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="theme-color" content="#00BCD4">
 
+		<!-- Basically the polymer equivalent of #include statements -->
 		<script src="bower_components/webcomponentsjs/webcomponents.js"></script>
 		<link rel="import" href="bower_components/polymer/polymer.html">
 		<link rel="import" href="bower_components/font-roboto/roboto.html">
@@ -22,13 +24,16 @@
 		<!-- For dev only!! -->
 		<link rel="import" href="bower_components/bacon-ipsum/bacon-ipsum.html">
 
+		<!-- Styles throughout the app -->
 		<style is="custom-style">
+			/* For the main page */
 			:root
 			{
 				font-family: 'Roboto', 'Noto', sans-serif;
 				background-color: #eee;
 			}
 
+			/* Style the un-condensed and condensed versions of the header */
 			app-header
 			{
 				--app-header-background-front-layer:
@@ -42,6 +47,7 @@
 					};
 			}
 
+			/* Make the icon buttons black */
 			paper-icon-button
 			{
 				color: black;
@@ -49,26 +55,40 @@
 		</style>
 	</head>
 
+	<!-- This unresolved attribute makes it fade in after the content is loaded -->
 	<body unresolved>
+
 		<!-- The whole layout which includes a side drawer and a header layout -->
 		<app-drawer-layout fullbleed>
+
 			<!-- Drawer on the side of the page -->
 			<app-drawer swipe-open>
 				<h1>Oh hot dayum</h1>
 			</app-drawer>
 
 			<!-- Main content area -->
+			<!-- The has-scrolling-region attribute is there because it has to provide its own scrollspace given it's 
+	   			inside the drawer layout -->
 			<app-header-layout has-scrolling-region>
+
+				<!-- Header area where the condensed and uncondensed toolbars are styled -->
 				<app-header effects="waterfall blend-background resize-title" condenses reveals>
+
+					<!-- Condensed toolbar. The condensed-title attribute means that will be hidden until
+		 				the page is scrolled appropriately. The icon button just chills there regardless -->
 					<app-toolbar>
 						<paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
 						<h4 condensed-title>My App</h4>
 					</app-toolbar>
+
+					<!-- Second toolbar which has the full title -->
 					<app-toolbar>
 						<h1 spacer main-title>My App</h1>
 					</app-toolbar>
+
 				</app-header>
 
+				<!-- Filler content -->
 				<div content>My main content -- a placeholder for the future custom elements.</div>
 				<bacon-ipsum sentences="5000"></bacon-ipsum>
 

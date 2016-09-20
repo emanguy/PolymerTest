@@ -1,0 +1,21 @@
+{
+  "name": "test-app",
+  "version": "1.0.0",
+  "authors": [
+    "Evan Rittenhouse <eritte2@umbc.edu>"
+  ],
+  "description": "A polymer app that shows how easy it is to work with.",
+  "main": "index.html",
+  "license": "Apache 2.0",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "app-layout": "PolymerElements/app-layout#~0.10.4"
+  }
+}

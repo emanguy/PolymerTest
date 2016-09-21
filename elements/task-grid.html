@@ -1,0 +1,99 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-layout/app-grid/app-grid-style.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+
+<dom-module id="task-grid">
+	<template>
+		<style include="app-grid-style">
+			:host 
+			{
+				display: block;
+				--app-grid-columns: 4;
+				--app-grid-gutter: 16px;
+			}
+
+			paper-card
+			{
+				--paper-card-background-color: white;
+
+				--paper-card: {
+					display: flex;
+					flex-direction: column;
+				};
+
+				--paper-card-content: {
+					flex: 1;
+
+				};
+
+				--paper-card-actions: {
+					color: var(--secondary-color);
+				};
+			}
+
+			ul
+			{
+				padding: 0;
+				list-style: none;
+			}
+
+			@media (max-width: 600px)
+			{
+				:host 
+				{
+					--app-grid-columns: 1;
+					--app-grid-gutter: 8px;
+				}
+			}
+		</style>
+
+		<div class="app-grid">
+			
+			<template is="dom-repeat" items="{{tasks}}" as="task">
+					<paper-card heading="{{task.name}}">
+						<div class="card-content">You need to get this done! <div class="spacer"></div></div>
+						<div class="card-actions">
+							<paper-button on-tap="removeTask"><iron-icon icon="done"></iron-icon> Done</paper-button>
+						</div>
+					</paper-card>
+			</template>
+			
+		</div>
+	</template>
+
+<script>
+Polymer({
+	is: "task-grid",
+
+	properties: {
+		tasks: {
+			type: Array,
+			notify: true,
+			value: function() { return []; }
+		}
+	},
+
+	removeTask: function(event) {
+		var index = this.tasks.indexOf(event.model.task);
+		this.splice("tasks", index, 1);
+	},
+
+	// Don't worry about this stuff
+
+	attached: function() {
+		// Because of the way custom properties work, I have to do this for the media query to update the columns
+		this._updateGridStyles = this._updateGridStyles || function() {
+			              this.updateStyles();
+		}.bind(this);
+		window.addEventListener('resize', this._updateGridStyles);
+	},
+
+	detached: function() {
+		window.removeEventListener('resize', this._updateGridStyles);
+	}
+});
+</script>
+</dom-module>

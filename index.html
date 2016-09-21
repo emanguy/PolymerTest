@@ -20,6 +20,10 @@
 		<link rel="import" href="bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 		<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
 		<link rel="import" href="bower_components/iron-icons/iron-icons.html">
+		<link rel="import" href="bower_components/app-storage/app-localstorage/app-localstorage-document.html">
+
+		<link rel="import" href="elements/task-input.html">
+		<link rel="import" href="elements/task-grid.html">
 
 		<!-- Styles throughout the app -->
 		<style is="custom-style">
@@ -28,6 +32,16 @@
 			{
 				font-family: 'Roboto', 'Noto', sans-serif;
 				background-color: #eee;
+
+				--primary-color: var(--paper-cyan-500);
+				--light-primary-color: var(--paper-cyan-100);
+				--dark-primary-color: var(--paper-cyan-700);
+
+				--secondary-color: var(--paper-blue-500);
+				--light-secondary-color: var(--paper-blue-100);
+				--dark-secondary-color: var(--paper-blue-700);
+
+				--dark-background-text-color: white;
 			}
 
 			/* Style the un-condensed and condensed versions of the header */
@@ -35,12 +49,12 @@
 			{
 				--app-header-background-front-layer:
 					{
-						background-color: var(--paper-cyan-500);
+						background-color: var(--primary-color);
 					};
 
 				--app-header-background-rear-layer:
 					{
-						background-color: var(--paper-blue-500);
+						background-color: var(--secondary-color);
 					};
 			}
 
@@ -85,8 +99,21 @@
 
 				</app-header>
 
+<<<<<<< HEAD
 				<!-- Filler content -->
 				<div content>My main content -- a placeholder for the future custom elements.</div>
+=======
+				<template is="dom-bind">
+					<!-- Input element for tasks -->
+					<task-input tasks="{{tasklist}}"></task-input>
+
+					<!-- Task display -->
+					<task-grid tasks="{{tasklist}}"></task-grid>
+
+					<!-- Local storage for tasks. Tasks will be saved between page visits -->
+					<app-localstorage-document key="sampleAppList" data="{{tasklist}}"></app-localstorage-document>
+				</template>
+>>>>>>> master
 
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui dicta minus molestiae vel beatae natus eveniet ratione temporibus aperiam harum alias officiis assumenda officia quibusdam deleniti eos cupiditate dolore doloribus!</p>
 				<p>Ad dolore dignissimos asperiores dicta facere optio quod commodi nam tempore recusandae. Rerum sed nulla eum vero expedita ex delectus voluptates rem at neque quos facere sequi unde optio aliquam!</p>

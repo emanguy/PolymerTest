@@ -8,13 +8,16 @@
 <dom-module id="task-grid">
 	<template>
 		<style include="app-grid-style">
+
+			/* Define the number of columns there should be by default */
 			:host 
 			{
 				display: block;
-				--app-grid-columns: 4;
+				--app-grid-columns: 3;
 				--app-grid-gutter: 16px;
 			}
 
+			/* Add some styles to paper-card so it's white and the actions stay at the bottom of the card */
 			paper-card
 			{
 				--paper-card-background-color: white;
@@ -34,12 +37,7 @@
 				};
 			}
 
-			ul
-			{
-				padding: 0;
-				list-style: none;
-			}
-
+			/* Switch to one column for mobile view */
 			@media (max-width: 600px)
 			{
 				:host 
@@ -48,20 +46,37 @@
 					--app-grid-gutter: 8px;
 				}
 			}
+
+			/* Add padding on content after we're out of tablet range */
+			@media (min-width: 960px)
+			{
+				:host
+				{
+					padding-left: 15%;
+					padding-right: 15%;
+				}
+			}
 		</style>
 
+		<!-- Places the task cards in a grid -->
 		<div class="app-grid">
 			
+			<!-- "Repeating template" - adds the enclosed HTML for every element of the tasks array -->
 			<template is="dom-repeat" items="{{tasks}}" as="task">
+
 					<paper-card heading="{{task.name}}">
 						<div class="card-content">You need to get this done! <div class="spacer"></div></div>
 						<div class="card-actions">
-							<paper-button on-tap="removeTask"><iron-icon icon="done"></iron-icon> Done</paper-button>
+							<!-- This would normally be "on-tap" but using the transitionend
+		   						event will wait for the ripple animation to complete first. -->
+							<paper-button on-transitionend="removeTask"><iron-icon icon="done"></iron-icon> Done</paper-button>
 						</div>
 					</paper-card>
+
 			</template>
 			
 		</div>
+
 	</template>
 
 <script>
@@ -69,6 +84,7 @@ Polymer({
 	is: "task-grid",
 
 	properties: {
+		// This is going to be shared with the task-input element
 		tasks: {
 			type: Array,
 			notify: true,
@@ -76,12 +92,13 @@ Polymer({
 		}
 	},
 
+	// When the done button is clicked on any element, remove the associated data and thus the element
 	removeTask: function(event) {
 		var index = this.tasks.indexOf(event.model.task);
 		this.splice("tasks", index, 1);
 	},
 
-	// Don't worry about this stuff
+	// Don't worry about this stuff -- it has to do with setting CSS variables from media queries
 
 	attached: function() {
 		// Because of the way custom properties work, I have to do this for the media query to update the columns

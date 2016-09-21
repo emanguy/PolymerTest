@@ -7,6 +7,7 @@
 <dom-module id="task-input">
 	<template>
 		<style>
+			/* Styling the element itself */
 			:host
 			{
 				margin-left: 0;
@@ -20,10 +21,12 @@
 				height: 64px;
 				display: block;
 
+				/* Giving it a horizontal, vertically centered layout */
 				@apply(--layout-horizontal);
 				@apply(--layout-center);
 			}
 
+			/* Coloring the paper input and making it flex with a weight of 3 */
 			paper-input
 			{
 				@apply(--layout-flex-3);
@@ -32,6 +35,7 @@
 				--paper-input-container-input-color: var(--dark-background-text-color);
 			}
 
+			/* Add a container around the button so it looks right */
 			.buttoncontainer
 			{
 				@apply(--layout-flex-2);
@@ -39,15 +43,20 @@
 				@apply(--layout-center);
 			}
 
+			/* Themes a "spacer" div which provides some space between the input and button */
 			.spacer
 			{
 				@apply(--layout-flex)
 			}
 		</style>
 
+		<!-- User inputs task name here, the input gets bound to the "taskName" property -->
 		<paper-input value="{{taskName}}" label="New Task"></paper-input>
+
+		<!-- Add that spacer I talked about before -->
 		<div class="spacer"></div>
 
+		<!-- Add the "add task" button -->
 		<div class="buttoncontainer">
 			<paper-icon-button id="addtask" icon="add"></paper-icon-button>
 		</div>
@@ -58,7 +67,11 @@ Polymer({
 	is: "task-input",
 
 	properties: {
+		// The value of the text input at any given time
 		taskName: String,
+
+		// An array containing objects which describe the tasks the user has input.
+		// This array will be propagated out and into the task grid element.
 		tasks:
 		{
 			type: Array,
@@ -67,10 +80,12 @@ Polymer({
 		}
 	},
 
+	// Add a listener for the "addtask" button being tapped or clicked. Doing this will invoke pushTask()
 	listeners: {
 		"addtask.tap": "pushTask"
 	},
 
+	// Called upon clicking the button. Adds the current value of the input to the array then clears the input.
 	pushTask: function()
 	{
 		this.push("tasks", { name: this.taskName });

@@ -7,50 +7,44 @@
 <dom-module id="task-grid">
 	<template>
 		<style include="app-grid-style">
-			:host
+			:host 
 			{
+				display: block;
 				--app-grid-columns: 4;
 				--app-grid-gutter: 16px;
-				--app-grid-item-height: 200px;
-
-				display: block;
-				
-				@apply(--layout-vertical);
-				@apply(--layout-center);
 			}
 
 			paper-card
 			{
 				--paper-card-background-color: white;
+				margin: 0;
 			}
 
-			@media(min-width: 600)
+			ul
 			{
-				:host
+				padding: 0;
+				list-style: none;
+			}
+
+			@media (max-width: 600px)
+			{
+				:host 
 				{
 					--app-grid-columns: 1;
 					--app-grid-gutter: 8px;
-					--app-grid-item-height: 150px;
-
-					display: block;
-					
-					@apply(--layout-vertical);
-					@apply(--layout-center);
 				}
 			}
 		</style>
 
-		<div class="app-grid" has-aspect-ratio>
+		<div class="app-grid">
 			
 			<template is="dom-repeat" items="{{tasks}}" as="task">
-				<paper-card heading="{{task.name}}">
-					<div class="card-content">
-						<p>You need to get this done!</p>
-					</div>
-					<div class="card-actions">
-						<paper-button>Done</paper-button>
-					</div>
-				</paper-card>
+					<paper-card heading="{{task.name}}">
+						<div class="card-content">You need to get this done!</div>
+						<div class="card-actions">
+							<paper-button>Done</paper-button>
+						</div>
+					</paper-card>
 			</template>
 			
 		</div>
@@ -66,6 +60,18 @@ Polymer({
 			notify: true,
 			value: function() { return []; }
 		}
+	},
+
+	attached: function() {
+		// Because of the way custom properties work, I have to do this for the media query to update the columns
+		this._updateGridStyles = this._updateGridStyles || function() {
+			              this.updateStyles();
+		}.bind(this);
+		window.addEventListener('resize', this._updateGridStyles);
+	},
+
+	detached: function() {
+		window.removeEventListener('resize', this._updateGridStyles);
 	}
 });
 </script>

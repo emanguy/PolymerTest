@@ -21,6 +21,9 @@
 		<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
 		<link rel="import" href="bower_components/iron-icons/iron-icons.html">
 
+		<link rel="import" href="elements/task-input.html">
+		<link rel="import" href="elements/task-grid.html">
+
 		<!-- For dev only!! -->
 		<link rel="import" href="bower_components/bacon-ipsum/bacon-ipsum.html">
 
@@ -31,6 +34,16 @@
 			{
 				font-family: 'Roboto', 'Noto', sans-serif;
 				background-color: #eee;
+
+				--primary-color: var(--paper-cyan-500);
+				--light-primary-color: var(--paper-cyan-100);
+				--dark-primary-color: var(--paper-cyan-700);
+
+				--secondary-color: var(--paper-blue-500);
+				--light-secondary-color: var(--paper-blue-100);
+				--dark-secondary-color: var(--paper-blue-700);
+
+				--dark-background-text-color: white;
 			}
 
 			/* Style the un-condensed and condensed versions of the header */
@@ -38,12 +51,12 @@
 			{
 				--app-header-background-front-layer:
 					{
-						background-color: var(--paper-cyan-500);
+						background-color: var(--primary-color);
 					};
 
 				--app-header-background-rear-layer:
 					{
-						background-color: var(--paper-blue-500);
+						background-color: var(--secondary-color);
 					};
 			}
 
@@ -89,8 +102,10 @@
 				</app-header>
 
 				<!-- Filler content -->
-				<div content>My main content -- a placeholder for the future custom elements.</div>
-				<bacon-ipsum sentences="5000"></bacon-ipsum>
+				<template is="dom-bind">
+					<task-input tasks="{{tasklist}}"></task-input>
+					<task-grid tasks="{{tasklist}}"></task-grid>
+				</template>
 
 			</app-header-layout>
 		</app-drawer-layout>

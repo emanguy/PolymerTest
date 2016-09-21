@@ -1,0 +1,72 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-layout/app-grid/app-grid-style.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<dom-module id="task-grid">
+	<template>
+		<style include="app-grid-style">
+			:host
+			{
+				--app-grid-columns: 4;
+				--app-grid-gutter: 16px;
+				--app-grid-item-height: 200px;
+
+				display: block;
+				
+				@apply(--layout-vertical);
+				@apply(--layout-center);
+			}
+
+			paper-card
+			{
+				--paper-card-background-color: white;
+			}
+
+			@media(min-width: 600)
+			{
+				:host
+				{
+					--app-grid-columns: 1;
+					--app-grid-gutter: 8px;
+					--app-grid-item-height: 150px;
+
+					display: block;
+					
+					@apply(--layout-vertical);
+					@apply(--layout-center);
+				}
+			}
+		</style>
+
+		<div class="app-grid" has-aspect-ratio>
+			
+			<template is="dom-repeat" items="{{tasks}}" as="task">
+				<paper-card heading="{{task.name}}">
+					<div class="card-content">
+						<p>You need to get this done!</p>
+					</div>
+					<div class="card-actions">
+						<paper-button>Done</paper-button>
+					</div>
+				</paper-card>
+			</template>
+			
+		</div>
+	</template>
+
+<script>
+Polymer({
+	is: "task-grid",
+
+	properties: {
+		tasks: {
+			type: Array,
+			notify: true,
+			value: function() { return []; }
+		}
+	}
+});
+</script>
+</dom-module>

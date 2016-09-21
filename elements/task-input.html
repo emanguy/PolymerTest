@@ -1,0 +1,84 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-styles/paper-styles.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+
+<dom-module id="task-input">
+	<template>
+		<style>
+			:host
+			{
+				margin-left: 0;
+				margin-right: 0;
+				padding-left: 15%;
+				padding-right: 15%;
+
+				background-color: var(--dark-primary-color);
+				color: white;
+
+				height: 64px;
+				display: block;
+
+				@apply(--layout-horizontal);
+				@apply(--layout-center);
+			}
+
+			paper-input
+			{
+				@apply(--layout-flex-3);
+				--paper-input-container-color: var(--dark-background-text-color);
+				--paper-input-container-focus-color: var(--light-primary-color);
+				--paper-input-container-input-color: var(--dark-background-text-color);
+			}
+
+			.buttoncontainer
+			{
+				@apply(--layout-flex-2);
+				@apply(--layout-vertical);
+				@apply(--layout-center);
+			}
+
+			.spacer
+			{
+				@apply(--layout-flex)
+			}
+		</style>
+
+		<paper-input value="{{taskName}}" label="New Task"></paper-input>
+		<div class="spacer"></div>
+
+		<div class="buttoncontainer">
+			<paper-icon-button id="addtask" icon="add"></paper-icon-button>
+		</div>
+	</template>
+
+<script>
+Polymer({
+	is: "task-input",
+
+	properties: {
+		taskName: String,
+		tasks:
+		{
+			type: Array,
+			notify: true,
+			value: function() { return []; }
+		}
+	},
+
+	listeners: {
+		"addtask.tap": "pushTask"
+	},
+
+	pushTask: function()
+	{
+		this.push("tasks", { name: this.taskName });
+		this.taskName = "";
+
+		console.log("Added a task.");
+		console.log(this.tasks);
+	}
+});
+</script>
+</dom-module>

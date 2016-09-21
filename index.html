@@ -20,6 +20,7 @@
 		<link rel="import" href="bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 		<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
 		<link rel="import" href="bower_components/iron-icons/iron-icons.html">
+		<link rel="import" href="bower_components/app-storage/app-localstorage/app-localstorage-document.html">
 
 		<link rel="import" href="elements/task-input.html">
 		<link rel="import" href="elements/task-grid.html">
@@ -98,10 +99,15 @@
 
 				</app-header>
 
-				<!-- Filler content -->
 				<template is="dom-bind">
+					<!-- Input element for tasks -->
 					<task-input tasks="{{tasklist}}"></task-input>
+
+					<!-- Task display -->
 					<task-grid tasks="{{tasklist}}"></task-grid>
+
+					<!-- Local storage for tasks. Tasks will be saved between page visits -->
+					<app-localstorage-document key="sampleAppList" data="{{tasklist}}"></app-localstorage-document>
 				</template>
 
 			</app-header-layout>

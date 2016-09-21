@@ -32,7 +32,8 @@
 			{
 				font-family: 'Roboto', 'Noto', sans-serif;
 				background-color: #eee;
-
+				
+				/* These are CSS variables. You can use them in elements throughout the page for styling */
 				--primary-color: var(--paper-cyan-500);
 				--light-primary-color: var(--paper-cyan-100);
 				--dark-primary-color: var(--paper-cyan-700);
@@ -47,6 +48,8 @@
 			/* Style the un-condensed and condensed versions of the header */
 			app-header
 			{
+				/* This is a CSS mixin. It allows me to dump CSS rules into specific parts of an element.
+				   in this case, I'm setting the background color of the "expanded" layer of the app header */
 				--app-header-background-front-layer:
 					{
 						background-color: var(--primary-color);
@@ -66,13 +69,13 @@
 		</style>
 	</head>
 
-	<!-- This unresolved attribute makes it fade in after the content is loaded -->
+	<!-- This unresolved attribute makes page content fade in only after the content is loaded -->
 	<body unresolved>
 
 		<!-- The whole layout which includes a side drawer and a header layout -->
-		<app-drawer-layout fullbleed>
+		<app-drawer-layout responsive-width="768px" fullbleed>
 
-			<!-- Drawer on the side of the page -->
+			<!-- Drawer on the side of the page. The "swipe-open" attribute allows mobile users to swipe the drawer open. -->
 			<app-drawer swipe-open>
 				<h1>Oh hot dayum</h1>
 			</app-drawer>
@@ -85,7 +88,7 @@
 				<!-- Header area where the condensed and uncondensed toolbars are styled -->
 				<app-header effects="waterfall blend-background resize-title" condenses reveals>
 
-					<!-- Condensed toolbar. The condensed-title attribute means that will be hidden until
+					<!-- Condensed toolbar. The condensed-title attribute means that it will be hidden until
 		 				the page is scrolled appropriately. The icon button just chills there regardless -->
 					<app-toolbar>
 						<paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
@@ -99,6 +102,7 @@
 
 				</app-header>
 
+				<!-- This is an auto-binding template. It allows me to bind the "tasklist" array between these elements together -->
 				<template is="dom-bind">
 					<!-- Input element for tasks -->
 					<task-input tasks="{{tasklist}}"></task-input>

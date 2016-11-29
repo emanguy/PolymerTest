@@ -5,6 +5,9 @@
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 
+<!--
+	The task-grid element displays a responsive grid of <paper-card> elements.
+	-->
 <dom-module id="task-grid">
 	<template>
 		<style include="app-grid-style">
@@ -85,6 +88,7 @@ Polymer({
 
 	properties: {
 		// This is going to be shared with the task-input element
+		/** The list of tasks to be displayed by this element. */
 		tasks: {
 			type: Array,
 			notify: true,
@@ -92,7 +96,11 @@ Polymer({
 		}
 	},
 
-	// When the done button is clicked on any element, remove the associated data and thus the element
+	/** 
+	 * When the done button is clicked on any element, remove the associated data and thus the element.
+	 *
+	 * @param event {object} The event which tells this element where to remove the element in the model.
+	 */
 	removeTask: function(event) {
 		var index = this.tasks.indexOf(event.model.task);
 		this.splice("tasks", index, 1);
